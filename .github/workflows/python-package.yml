@@ -6,7 +6,10 @@ name: Python Scrapper
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+#   분 / 시 / 일 / 월 / 요일
+#   '*/10 * * * *' 10분씩마다 실행
+#   '0 0 * * *' 매일 UTC 0시 0분마다 실행(한국시간 9시)
+    - cron: '0 23 * * *'
   push:
     branches: [ "master" ]
   pull_request:
