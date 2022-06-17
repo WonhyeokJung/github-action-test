@@ -19,6 +19,7 @@ on:
 #   '*/10 * * * *' 10분씩마다 실행
 #   '0 0 * * *' 매일 UTC 0시 0분마다 실행(한국시간 9시)
     - cron: '0 23 * * *'
+#   Push / Pull branch 설정
   push:
     branches: [ "master" ]
   pull_request:
@@ -32,21 +33,24 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ["3.10"]
-
+    # Python version 설정 (위의 matrix: python-version에 설정된 ver에서 Test
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
+    # 첨부해둔 requirements.txt에서 의존성 패키지 Download
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         python -m pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    # Scrapping 파일 실행
     - name: Run Scrapper
       run: |
         python "scrapping.py"
+    # Commit
     - name: Commits
       run: |
         git config --local user.email "wonhyeok.contact@gmail.com"
@@ -56,6 +60,7 @@ jobs:
 #     - name: Test with pytest
 #       run: |
 #         pytest
+    # Push
     - name: Push
       uses: ad-m/github-push-action@master
       with:
