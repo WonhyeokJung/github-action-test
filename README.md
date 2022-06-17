@@ -6,7 +6,7 @@ Github Actions 이용하여 매일 뉴스 스크래핑 하기
 2. Configure후 /workflow/.yml 파일로 이동
 3. 이하 .yml 파일 설정 예시
 
-```
+```python
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
